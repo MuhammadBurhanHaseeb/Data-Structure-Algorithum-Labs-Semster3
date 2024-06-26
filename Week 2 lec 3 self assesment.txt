@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool isValid(string s) {   
+        
+        stack<char> st;
+        int len = s.size();
+        if(len != 1)
+            {
+                for(int i = 0; s[i] != '\0'; i++)
+            {
+                if(s[i] == '(' || s[i] == '{' || s[i] == '[')
+                {
+                    st.push(s[i]);
+                }
+                else
+                {
+                    if(st.size() == 0)
+                    {
+                        return false;
+                    }
+                    char top = st.top();
+                    if(s[i] == ')' && top != '(')
+                    {
+                        return false;
+                    }
+                    else if(s[i] == '}' && top != '{')
+                    {
+                        return false;
+                    }
+                    else if(s[i] == ']' && top != '[')
+                    {
+                        return false;
+                    }
+                    st.pop();
+                }
+            }
+            if(st.size() == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
